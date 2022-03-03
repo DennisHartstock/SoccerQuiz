@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.soccerquiz.databinding.FragmentWelcomeScreenBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -36,7 +38,12 @@ class WelcomeScreenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding: FragmentWelcomeScreenBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_welcome_screen, container, false)
+        val binding: FragmentWelcomeScreenBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_welcome_screen, container, false)
+        binding.letsPlayButton.setOnClickListener { view: View ->
+            Navigation.findNavController(view)
+                .navigate(R.id.action_welcomeScreenFragment_to_quizFragment)
+        }
         return binding.root
     }
 

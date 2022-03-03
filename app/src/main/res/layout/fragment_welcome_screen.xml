@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.soccerquiz.WelcomeScreenFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".WelcomeScreenFragment">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/imageView3"
@@ -35,16 +35,16 @@
             app:layout_constraintVertical_bias="0.218" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/letsPlayButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="96dp"
+            android:background="@drawable/lets_play_button_background"
             android:text="let's play"
             android:textColor="@color/white"
             android:textSize="24sp"
-            android:background="@drawable/lets_play_button_background"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.533"
