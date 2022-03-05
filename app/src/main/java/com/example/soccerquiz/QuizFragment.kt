@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import com.example.soccerquiz.databinding.FragmentQuizBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -109,13 +110,45 @@ class QuizFragment : Fragment() {
 
         getRandomQuizItem()
         binding.quizFragment = this
+        binding.passButton.setOnClickListener { view: View ->
+            val selectedCheckBoxId = binding.quizRadioGroup.checkedRadioButtonId
+
+            if (selectedCheckBoxId != -1) {
+                var answerIndex = 0
+                when (selectedCheckBoxId) {
+                    R.id.firstRadiobutton -> answerIndex = 0
+                    R.id.secondRadiobutton -> answerIndex = 1
+                    R.id.thirdRadiobutton -> answerIndex = 2
+                }
+
+                if (answers[answerIndex] == currentQuizItem.answerList[0]) {
+                    quizItemIndex++
+
+                    if (quizItemIndex < numberOfQuestions) {
+                        setQuizItem()
+                        binding.invalidateAll()
+                    } else {
+                        // Go to goalFragment
+                        view.findNavController().navigate(R.id.goalFragment)
+                    }
+                } else {
+                    // Go to missFragment
+                    view.findNavController().navigate(R.id.missFragment)
+                }
+            }
+        }
         return binding.root
     }
 
     private fun getRandomQuizItem() {
         quizItems.shuffle()
+        quizItemIndex = 0
+        setQuizItem()
+    }
+
+    private fun setQuizItem() {
         currentQuizItem = quizItems[quizItemIndex]
-        answers = currentQuizItem.answer.toMutableList()
+        answers = currentQuizItem.answerList.toMutableList()
         answers.shuffle()
     }
 
