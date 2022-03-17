@@ -1,6 +1,7 @@
 package com.example.soccerquiz
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
@@ -123,17 +124,27 @@ class QuizFragment : Fragment() {
 
                 if (answers[answerIndex] == currentQuizItem.answerList[0]) {
                     quizItemIndex++
+                    binding.ballImageView.animate().translationXBy(150f)
+                        .rotation(1080f).duration = 3000
 
                     if (quizItemIndex < numberOfQuestions) {
                         setQuizItem()
                         binding.invalidateAll()
+
                     } else {
                         // Go to goalFragment
-                        view.findNavController().navigate(R.id.goalFragment)
+                        Handler().postDelayed({
+                            view.findNavController().navigate(R.id.goalFragment)
+                        }, 3000)
                     }
                 } else {
                     // Go to missFragment
-                    view.findNavController().navigate(R.id.missFragment)
+                    binding.ballImageView.animate().translationXBy(-1000f).rotation(7200f)
+                        .duration = 5000
+
+                    Handler().postDelayed({
+                        view.findNavController().navigate(R.id.missFragment)
+                    }, 5000)
                 }
             }
         }
